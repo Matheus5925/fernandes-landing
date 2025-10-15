@@ -153,7 +153,7 @@ const HeroSection = () => (
             Construindo o Futuro, <span className="text-blue-400">Assessorando o Sucesso.</span>
           </h1>
           <p className="mt-6 text-lg text-slate-200 max-w-xl">
-            Soluções completas em consultoria e empreendimentos para transformar seus projetos mais ambiciosos em realidade.
+            Soluções completas em consultoria e construções de empreendimentos para transformar seus projetos mais ambiciosos em realidade.
           </p>
         </motion.div>
         <motion.div
