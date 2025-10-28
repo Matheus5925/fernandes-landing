@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { SiWhatsapp } from 'react-icons/si';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Building, Users, Award, Clock, Linkedin, Instagram, Facebook, Menu, X, ChevronDown } from 'lucide-react';
+import { Mail, Phone, MapPin, Building, Users, Award, Clock, Linkedin, Instagram, Facebook, Menu } from 'lucide-react';
 // Componente para o Logo (SVG para melhor qualidade)
 const Logo = ({ className }) => (
   <svg className={className} viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,6 +17,123 @@ const Logo = ({ className }) => (
     <path d="M0 50 L200 50" stroke="#4A90E2" strokeWidth="2" />
   </svg>
 );
+
+const FormScreen = () => {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    city: "",
+    projectType: "",
+    details: "",
+  });
+
+  const phoneNumber = "5511983082634"; // <-- coloque aqui o número do WhatsApp (com DDI +55 e DDD)
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setForm((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const message = `
+👋 Olá! vim pelo site e quero falar com um especialista.
+
+📋 *Dados do contato:*
+- Nome: ${form.name}
+- E-mail: ${form.email}
+- Cidade/Estado: ${form.city}
+- Tipo de projeto: ${form.projectType}
+- Detalhes: ${form.details}
+    `.trim();
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    window.open(whatsappUrl, "_blank");
+  };
+
+  return (
+    <form className="space-y-4" onSubmit={handleSubmit}>
+      <FormInput
+        id="name"
+        label="Seu Nome Completo"
+        placeholder="João da Silva"
+        value={form.name}
+        onChange={handleChange}
+        required
+      />
+
+      <FormInput
+        id="email"
+        label="Seu E-mail"
+        type="email"
+        placeholder="joao.silva@email.com"
+        value={form.email}
+        onChange={handleChange}
+        required
+      />
+
+      <FormInput
+        id="city"
+        label="Cidade / Estado"
+        placeholder="São Paulo - SP"
+        value={form.city}
+        onChange={handleChange}
+        required
+      />
+
+      <div>
+        <label
+          htmlFor="projectType"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
+          Tipo de Projeto
+        </label>
+        <select
+          id="projectType"
+          className="w-full border rounded-lg px-3 py-2 text-gray-700 focus:ring-2 focus:ring-green-500 focus:outline-none"
+          value={form.projectType}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Selecione uma opção</option>
+          <option value="Residencial">Residencial</option>
+          <option value="Comercial">Comercial</option>
+          <option value="Reforma">Reforma</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+
+      <div>
+        <label
+          htmlFor="details"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
+          Descreva brevemente seu projeto
+        </label>
+        <textarea
+          id="details"
+          rows="4"
+          className="w-full border rounded-lg px-3 py-2 text-gray-700 focus:ring-2 focus:ring-green-500 focus:outline-none"
+          placeholder="Ex: construção de casa térrea de 3 quartos, com garagem e área gourmet."
+          value={form.details}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <MotionButton
+        type="submit"
+        className="w-full !mt-6 !py-4 text-lg flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold"
+      >
+        <SiWhatsapp size={24} />
+        Falar com Especialista
+      </MotionButton>
+    </form>
+  );
+};
 
 
 // Componentes reutilizáveis com animação
@@ -43,13 +161,15 @@ const AnimatedSection = ({ children, className = '' }) => (
   </motion.section>
 );
 
-const FormInput = ({ id, label, type = 'text', placeholder, required = true }) => (
+const FormInput = ({ id, label, value, type = 'text', placeholder, onChange,required = true }) => (
   <div>
     <label htmlFor={id} className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
     <input
       type={type}
       id={id}
       name={id}
+      onChange={onChange}
+      value={value}
       placeholder={placeholder}
       required={required}
       className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow duration-200"
@@ -162,16 +282,10 @@ const HeroSection = () => (
           transition={{ duration: 0.8, delay: 0.4 }}
           className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-2xl"
         >
-          <h3 className="text-2xl font-bold text-slate-800 text-center">Receba um Orçamento Gratuito</h3>
-          <p className="text-center text-slate-600 mt-2 mb-6">Fale com um de nossos especialistas.</p>
-          <form className="space-y-4">
-            <FormInput id="hero-name" label="Seu Nome" placeholder="João da Silva" />
-            <FormInput id="hero-email" label="Seu E-mail" type="email" placeholder="joao.silva@email.com" />
-            <FormInput id="hero-phone" label="Seu Telefone" type="tel" placeholder="(11) 99999-9999" />
-            <MotionButton className="w-full !mt-6 !py-4 text-lg">
-              Solicitar Contato
-            </MotionButton>
-          </form>
+          <h3 className="text-2xl font-bold text-slate-800 text-center">Fale com um de nossos especialistas</h3>
+          <p className="text-center text-slate-600 mt-2 mb-6"></p>
+          <FormScreen />
+
         </motion.div>
       </div>
     </div>
@@ -317,35 +431,7 @@ const ContactSection = () => (
         transition={{ duration: 0.7 }}
         className="mt-12 max-w-2xl mx-auto bg-white p-8 sm:p-10 rounded-2xl shadow-xl"
       >
-        <form className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="sm:col-span-2">
-            <FormInput id="contact-name" label="Nome Completo" placeholder="Seu nome completo" />
-          </div>
-          <div>
-            <FormInput id="contact-email" label="E-mail" type="email" placeholder="seu@email.com" />
-          </div>
-          <div>
-            <FormInput id="contact-phone" label="Telefone / WhatsApp" type="tel" placeholder="(00) 00000-0000" />
-          </div>
-          <div className="sm:col-span-2">
-            <label htmlFor="interest" className="block text-sm font-medium text-slate-700 mb-1">Tenho interesse em</label>
-            <select id="interest" name="interest" className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow duration-200">
-              <option>Consultoria de Projeto</option>
-              <option>Execução de Obra</option>
-              <option>Ambos</option>
-              <option>Outro</option>
-            </select>
-          </div>
-          <div className="sm:col-span-2">
-            <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-1">Mensagem</label>
-            <textarea id="message" name="message" rows="4" placeholder="Descreva brevemente seu projeto ou dúvida..." className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow duration-200"></textarea>
-          </div>
-          <div className="sm:col-span-2">
-            <MotionButton className="w-full !py-4 text-lg">
-              Enviar Mensagem
-            </MotionButton>
-          </div>
-        </form>
+        <FormScreen />
       </motion.div>
     </div>
   </AnimatedSection>
