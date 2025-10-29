@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SiWhatsapp } from 'react-icons/si';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, MapPin, Building, Users, Award, Clock, Linkedin, Instagram, Facebook, Menu } from 'lucide-react';
+import EmpreendimentosSection from './components/EmpreendimentosSection';
 // Componente para o Logo (SVG para melhor qualidade)
 const Logo = ({ className }) => (
   <svg className={className} viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +162,7 @@ const AnimatedSection = ({ children, className = '' }) => (
   </motion.section>
 );
 
-const FormInput = ({ id, label, value, type = 'text', placeholder, onChange,required = true }) => (
+const FormInput = ({ id, label, value, type = 'text', placeholder, onChange, required = true }) => (
   <div>
     <label htmlFor={id} className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
     <input
@@ -373,48 +374,6 @@ const BenefitsSection = () => {
   );
 };
 
-const TestimonialsSection = () => {
-  const testimonials = [
-    {
-      quote: "O profissionalismo e a transparência da Fernandes Assessoria foram essenciais para o sucesso do nosso empreendimento. Entregaram antes do prazo e com uma qualidade surpreendente.",
-      name: "Carlos Andrade",
-      company: "CEO, InvestCo"
-    },
-    {
-      quote: "A equipe de consultoria nos ajudou a economizar mais de 20% no custo total da obra com um planejamento inteligente. Recomendo fortemente!",
-      name: "Juliana Martins",
-      company: "Gerente de Projetos, Edifica Engenharia"
-    },
-  ];
-
-  return (
-    <AnimatedSection id="testimonials" className="bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 text-center">Histórias de Sucesso</h2>
-        <p className="mt-4 text-lg text-slate-600 text-center max-w-3xl mx-auto">
-          A confiança de nossos clientes é o nosso maior ativo.
-        </p>
-        <div className="mt-12 grid lg:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-slate-50 p-8 rounded-xl shadow-md"
-            >
-              <p className="text-slate-600 italic">"{testimonial.quote}"</p>
-              <div className="mt-6 font-semibold text-slate-800">{testimonial.name}</div>
-              <div className="text-blue-600 text-sm">{testimonial.company}</div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </AnimatedSection>
-  );
-};
-
 const ContactSection = () => (
   <AnimatedSection id="contact" className="bg-slate-100">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -479,7 +438,7 @@ export default function App() {
         <HeroSection />
         <AboutSection />
         <BenefitsSection />
-        <TestimonialsSection />
+        <EmpreendimentosSection />
         <ContactSection />
       </main>
       <Footer />
