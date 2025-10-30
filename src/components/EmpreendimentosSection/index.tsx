@@ -87,7 +87,7 @@ const EmpreendimentosSection = () => {
     <section id="empreendimentos" className="bg-white py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl sm:text-4xl font-bold text-slate-800">
-          Incorporações Realizados
+          Incorporações Realizadas
         </h2>
         <p className="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
           Confira algumas Incorporações concluídas com excelência pela Fernandes Assessoria.
