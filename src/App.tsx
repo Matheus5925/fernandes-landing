@@ -28,7 +28,7 @@ const FormScreen = () => {
     details: "",
   });
 
-  
+
   const phoneNumber = "5511977298183"; // <-- coloque aqui o número do WhatsApp (com DDI +55 e DDD)
 
   const handleChange = (e) => {
@@ -403,16 +403,27 @@ const Footer = () => (
       <div className="grid md:grid-cols-4 gap-8">
         <div className="md:col-span-2">
           <Logo className="h-20 w-auto mb-4" />
-          <p className="max-w-md">Realizando projetos e construindo relações de confiança através da engenharia de ponta e assessoria completa.</p>
+          <p className="max-w-md">
+            Realizando projetos e construindo relações de confiança através da engenharia de ponta e assessoria completa.
+          </p>
         </div>
+
         <div>
           <h4 className="font-semibold text-white mb-4">Contato</h4>
           <ul className="space-y-2">
-            <li className="flex items-center"><Mail size={16} className="mr-2" /> administrativo@fernandesassemprendimentos.com.br</li>
-            <li className="flex items-center"><Phone size={16} className="mr-2" /> +55 (11) 97729 8183</li>
-            <li className="flex items-center"><MapPin size={16} className="mr-2" /> Rua Horácio Cenci West Point, 09 - Sala 106, Sorocaba - SP</li>
+            <li className="flex items-start break-all">
+              <Mail size={16} className="mr-2 mt-1 shrink-0" />
+              administrativo@fernandesassemprendimentos.com.br
+            </li>
+            <li className="flex items-center">
+              <Phone size={16} className="mr-2 shrink-0" /> +55 (11) 97729 8183
+            </li>
+            <li className="flex items-start">
+              <MapPin size={16} className="mr-2 mt-1 shrink-0" /> Rua Horácio Cenci West Point, 09 - Sala 106, Sorocaba - SP
+            </li>
           </ul>
         </div>
+
         <div>
           <h4 className="font-semibold text-white mb-4">Siga-nos</h4>
           <div className="flex space-x-4">
@@ -422,6 +433,7 @@ const Footer = () => (
           </div>
         </div>
       </div>
+
       <div className="mt-10 border-t border-slate-700 pt-6 text-center text-sm text-slate-400">
         <p>&copy; {new Date().getFullYear()} Fernandes Assessoria e Empreendimentos. Todos os direitos reservados.</p>
       </div>
