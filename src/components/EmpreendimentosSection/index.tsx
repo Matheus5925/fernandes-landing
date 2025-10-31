@@ -13,7 +13,7 @@ const EmpreendimentosSection = () => {
     {
       name: "Terras Alpha 05 (Votorantim)",
       location: "Votorantim - SP",
-      image: "https://cdn.uso.com.br/16382/2023/09/232924231.jpg",
+      image: "https://img.olx.com.br/images/17/172573197204435.jpg",
       description:
         "Loteamento planejado com foco em sustentabilidade e qualidade de vida, localizado em uma das regiões mais valorizadas do interior paulista.",
     },
