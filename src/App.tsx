@@ -3,6 +3,7 @@ import { SiWhatsapp } from 'react-icons/si';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, MapPin, Building, Users, Award, Clock, Linkedin, Instagram, Facebook, Menu } from 'lucide-react';
 import EmpreendimentosSection from './components/EmpreendimentosSection';
+import ServicesUltraPremium from './components/ServicesSection';
 // Componente para o Logo (SVG para melhor qualidade)
 const Logo = ({ className }) => (
   <svg className={className} viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -451,6 +452,7 @@ export default function App() {
         <HeroSection />
         <AboutSection />
         <BenefitsSection />
+        <ServicesUltraPremium/>
         <EmpreendimentosSection />
         <ContactSection />
       </main>
